@@ -116,10 +116,19 @@ function App() {
     // )
   }
 
-  const deleteBook = (bookId) => {
-    setBookData(
-      bookData.filter( book => (book.id !== bookId))
-    )
+  const deleteBook = async (bookId) => {
+    try{
+      const deleteBook = await axios.delete(`http://localhost:3000/api/book/${bookId}`)
+      fetchBook()
+
+    }
+    catch(err) {
+      console.error(err)
+
+    }
+    // setBookData(
+    //   bookData.filter( book => (book.id !== bookId))
+    // )
   }
 
 
