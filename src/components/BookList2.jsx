@@ -26,6 +26,7 @@ export default function BookList(props) {
         render: (value, record, index ) => {
         return (<>
             <Button onClick={() => {props.onLiked(record.id)}} color='primary' variant='solid'>Like</Button>
+            <Button onClick={() => {props.onEdit(record)}}>Edit</Button>
             <Button onClick={() => {props.onDelete(record.id)}} color='danger' variant="dashed">Delete</Button>
         </>)}},
     ]

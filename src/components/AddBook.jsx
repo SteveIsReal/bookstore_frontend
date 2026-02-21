@@ -2,21 +2,8 @@ import {Form, Input, InputNumber, Select, Button} from 'antd'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
-const URL_CATEGORY = '/api/book-category'
 
 export default function AddBook(props) {
-
-    const [categories, setCategories] = useState([]);
-
-    const fetchCategories = async () => {
-        const response = await axios.get('http://localhost:3000'+URL_CATEGORY)
-        console.log(response.data.map((items) => ({value: items.id, label: items.name})))
-        setCategories(response.data.map((items) => ({value:items.id, label: items.name})))
-    }
-
-    useEffect(() => {
-        fetchCategories()
-    }, [])
 
     const generateId = () => {
         return Math.random().toString(36).substring(2, 15)
@@ -34,7 +21,7 @@ export default function AddBook(props) {
                 <InputNumber />
             </Form.Item>
             <Form.Item name='categoryId' label='Category'>
-                <Select allowClear style={{"width":"150px"}} options={categories}></Select>
+                <Select allowClear style={{"width":"150px"}} options={props.category}></Select>
             </Form.Item>
             <Form.Item name="author" label="Author" rules={[{required : true}]}>
                 <Input />
