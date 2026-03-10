@@ -8,10 +8,11 @@ import EditBook from './EditBook.jsx'
 import {Button, Spin} from 'antd'
 import { StepForwardOutlined } from '@ant-design/icons';
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const URL_BOOK = "/api/book"
 
-function BookScreen() {
+function BookScreen(props) {
   const [total, setTotalAmount] = useState(0)
   const [bookData, setBookData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -127,7 +128,6 @@ function BookScreen() {
     setEditBook(record)
   }
 
-  //de
   useEffect(() => {
     console.log(editBook)
 
@@ -188,7 +188,6 @@ function BookScreen() {
       />
     </>
   )
-
 }
 
 export default BookScreen
