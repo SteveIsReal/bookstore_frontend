@@ -49,7 +49,12 @@ function App() {
           </ProtectRoute>
           }></Route>
         <Route path="/login" element={<LoginScreen onLoginSuccess={handleLoginSuccess} />}></Route>
-        <Route path="*" element={<div><h1>Not found</h1><Link to={'/'}>Home</Link></div>}/>
+        <Route path="*" element={
+          <div>
+            <h1>Not found</h1>
+            <Link to={'/'}>Home</Link>
+          </div>
+          }/>
       </Routes>
 
     </>
