@@ -97,6 +97,7 @@ function BookScreen(props) {
   const [stockValue, setStockValue] = useState(0)
 
   const [editBook, setEditBook] = useState(null)
+  const [addBookStatus, setAddBookStatus] = useState(false)
 
   const handleLike = async (bookId) => {
 
@@ -168,8 +169,17 @@ function BookScreen(props) {
       {`Money : ${value}`}
       <h3>Book List</h3>
       {`Counter ${counter}`}
+      <hr></hr>
 
-      <AddBook category={categories} onBookAdded={addBook}/>
+      <Button onClick={() => {setAddBookStatus(true)}} type='primary'>Create Book</Button>
+
+      <AddBook 
+        category={categories} 
+        onBookAdded={addBook}
+        addBookStatus={addBookStatus}
+        onCancel = {() => setAddBookStatus(false)}
+
+      />
 
       {/*bookCount < 50 ? negativeSummary : positiveSummary*/}
       {bookCount >= 50 && positiveSummary}

@@ -39,6 +39,7 @@ const EditBook = (props) => {
 
     return (
         <Modal open={props.isOpen} onCancel={props.handleCancel} onOk={handleFormSubmit}>
+            <br></br>
             <Form form={forms}>
                 <Form.Item label="Title" name="title" rules={[{required: true}]}>
                     <Input /> 

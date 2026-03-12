@@ -1,6 +1,7 @@
-import {Form, Input, InputNumber, Select, Button} from 'antd'
+import {Form, Input, InputNumber, Select, Button, Modal} from 'antd'
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import { useForm } from 'antd/es/form/Form'
 
 
 export default function AddBook(props) {
@@ -9,15 +10,36 @@ export default function AddBook(props) {
         return Math.random().toString(36).substring(2, 15)
     }
 
+    const [forms] = useForm()
+
+    const formCancel = () =>{
+        props.onCancel()
+        forms.resetFields()
+    }
+
+    const submitForms = async () => {
+        try {
+            const formData = await forms.validateFields()
+            props.onBookAdded({...formData, likeCount : 0})
+            props.onCancel()
+        }
+        catch(err){
+            console.error(err)
+        }
+        
+    }
+
     return (
-        <Form layout='inline' onFinish={value => {props.onBookAdded({...value, likeCount:0})}}>
-            <Form.Item name='title' label='Title' rule={[{ require: true}]}>
+        <Modal open={props.addBookStatus} onCancel={formCancel} onOk={submitForms}>
+        <br></br>
+        <Form layout='horizontal' form={forms}>
+            <Form.Item name='title' label='Title' rules={[{ required: true}]}>
                 <Input />
             </Form.Item>
-            <Form.Item name='price' label='Price' rule={[{ require: true}]}>
+            <Form.Item name='price' label='Price' rules={[{ required: true}]}>
                 <InputNumber />
             </Form.Item>
-            <Form.Item name='stock' label='Stock' rule={[{ require: true}]}>
+            <Form.Item name='stock' label='Stock' rules={[{ required: true}]}>
                 <InputNumber />
             </Form.Item>
             <Form.Item name='categoryId' label='Category'>
@@ -26,10 +48,8 @@ export default function AddBook(props) {
             <Form.Item name="author" label="Author" rules={[{required : true}]}>
                 <Input />
             </Form.Item>
-            <Form.Item>
-                <Button type='Primary' htmlType='submit'>New Book</Button>
-            </Form.Item>
         </Form>
+        </Modal>
     )
 
 }
