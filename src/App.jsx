@@ -6,6 +6,7 @@ import BookScreen from './BookScreen'
 import EditBook from './EditBook'
 import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Settings from './Settings'
 
 axios.defaults.baseURL = "http://localhost:3000"
 
@@ -36,23 +37,28 @@ function App() {
   const handleLoginSuccess = (token) => {
     Cookies.set('auth', token)
     setIsAuthenticated(true)
-    navigate('/')
+    navigate('/book')
 
   }
 
   return (
     <>
       <Routes>
-        <Route path="/" element={
+        <Route path="/book" element={
           <ProtectRoute>
             <BookScreen isAuthenticated={isAuthenticated} />
           </ProtectRoute>
           }></Route>
         <Route path="/login" element={<LoginScreen onLoginSuccess={handleLoginSuccess} />}></Route>
+        <Route path="/settings" element={
+          <ProtectRoute>
+          <Settings></Settings>
+          </ProtectRoute>
+        }></Route>
         <Route path="*" element={
           <div>
             <h1>Not found</h1>
-            <Link to={'/'}>Home</Link>
+            <Link to={'/book'}>Home</Link>
           </div>
           }/>
       </Routes>

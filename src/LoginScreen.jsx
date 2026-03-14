@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button , Form , Input, Alert} from 'antd'
+import { Button , Form , Input, Alert } from 'antd'
 import axios from 'axios'
 
 const URL_AUTH = '/api/auth/login'

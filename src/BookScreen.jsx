@@ -1,14 +1,13 @@
 
 import { useState, useEffect } from 'react'
-//import BookList from "./components/BookList//"
 import BookList from './components/BookList2.jsx'
 import Clock from "./components/Clock.jsx"
 import AddBook from './components/AddBook.jsx'
 import EditBook from './EditBook.jsx'
-import {Button, Spin} from 'antd'
+import {Button, Spin } from 'antd'
 import { StepForwardOutlined } from '@ant-design/icons';
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import NavBar from './components/NavBar.jsx'
 
 const URL_BOOK = "/api/book"
 
@@ -30,8 +29,7 @@ function BookScreen(props) {
     const negativeSummary = <p style={{ "color" : "red"}}>Low stock - {bookCount}</p>
 
   }
-  */
-  const bookCount = bookData.reduce( (total, book) => total += book.stock, 0)
+  */ const bookCount = bookData.reduce( (total, book) => total += book.stock, 0)
   const positiveSummary = <p style={{ "color" : "green"}}>Wow, so many books - {bookCount}</p>
   const negativeSummary = <p style={{ "color" : "red"}}>Low stock - {bookCount}</p>
   
@@ -130,10 +128,6 @@ function BookScreen(props) {
     setEditBook(record)
   }
 
-  useEffect(() => {
-    // console.log(editBook)
-
-  }, [editBook])
 
 
   const URL_CATEGORY = '/api/book-category'
@@ -163,9 +157,15 @@ function BookScreen(props) {
   }, [])
 
   useEffect(() => setValue(bookData.reduce((total , book) => total + (book.price * book.stock), 0)), [bookData])
+  
+  const onNavClick = (e) => {
+    console.log(e)
+    navigate(`/${e.key}`)
+  }
 
   return (
     <>
+      <NavBar />
       <Clock></Clock>
       {`Money : ${value}`}
       <h3>Book List</h3>
