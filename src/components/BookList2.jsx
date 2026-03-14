@@ -4,7 +4,7 @@ export default function BookList(props) {
     const columns = [
         {title:"cover", dataIndex:'coverUrl', render: (text) => {
 
-            console.log(text)
+            // console.log(text)
 
             return  <Image src={`http://127.0.0.1:3080${text}`} height={100}></Image>
         }},

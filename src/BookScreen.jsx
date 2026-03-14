@@ -38,7 +38,7 @@ function BookScreen(props) {
   const [categories, setCategories] = useState([])
 
   const [counter, setCounter] = useState(0);
-  useEffect(() => console.log(`Change ${counter}`), [counter])
+  // useEffect(() => console.log(`Change ${counter}`), [counter])
 
   const counterClicked = () => {
     setCounter(counter + 1)
@@ -48,6 +48,7 @@ function BookScreen(props) {
     setLoading(true);
     try{
       const response = await axios.get(URL_BOOK)
+      // console.log(response.data)
       setBookData(response.data)
 
     }
@@ -65,7 +66,7 @@ function BookScreen(props) {
 
   const generateBook = () => {
     const current = bookData.length + 1
-    console.log(`created book ${current}`)
+    // console.log(`created book ${current}`)
     const data = {
       id: current,
       title: titleValue,
@@ -130,7 +131,7 @@ function BookScreen(props) {
   }
 
   useEffect(() => {
-    console.log(editBook)
+    // console.log(editBook)
 
   }, [editBook])
 
@@ -146,7 +147,7 @@ function BookScreen(props) {
 
     const categoryResponse = await axios.get('http://localhost:3000'+URL_CATEGORY)
 
-    console.log(`category : ${category} ${typeof(category) == "number"}`)
+    // console.log(`category : ${category} ${typeof(category) == "number"}`)
 
     if (typeof(category) == "number"){
       formData.categoryId = category

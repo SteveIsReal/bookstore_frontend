@@ -1,4 +1,4 @@
-import { Modal, Form, Input, InputNumber, Button, Select } from 'antd'
+import { Modal, Form, Input, InputNumber, Button, Select, Image } from 'antd'
 import { useEffect } from 'react'
 
 const EditBook = (props) => {
@@ -19,13 +19,13 @@ const EditBook = (props) => {
         }
     }, [props.editBook])
 
+
+
     const handleFormSubmit = async () => {
 
         try{
             const formData = await forms.validateFields()
-            console.log(formData)
             const {category, ...data} = formData
-            console.log(category)
             //const [submitCategory] = (props.category.filter((category) => (category.label == formData.category)))
             props.handleSubmit({...data, price: Number(formData.price)}, category, props.editBook.id)
 
@@ -39,6 +39,9 @@ const EditBook = (props) => {
 
     return (
         <Modal open={props.isOpen} onCancel={props.handleCancel} onOk={handleFormSubmit}>
+            <br></br>
+            {props.editBook != null && <Image src={`http://localhost:3080${props.editBook.coverUrl}`} height={150}></Image>}
+            <br></br>
             <br></br>
             <Form form={forms}>
                 <Form.Item label="Title" name="title" rules={[{required: true}]}>
